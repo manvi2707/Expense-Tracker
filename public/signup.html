@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Form</title>
+    <link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script  src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+    crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="icon" href="./Pics/web_logo.jpg">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background:linear-gradient(to right,rgb(71, 0, 61),rgb(116, 26, 107),rgb(202, 119, 211),#e7d6ea);
+            background-size: cover;
+        }
+        
+        .container {
+            width: 800px;
+            height: 430px;
+            display: flex;
+            box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        .left-side, .new-left-side {
+            background-color:rgb(167, 64, 167);
+            color: #fff;
+            width: 50%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            line-height:0.4;
+        }
+        .new-left-side {
+            display:none;
+        }
+        .left-side h1,.new-left-side h1 {
+            margin:70px 0px 0px 0px;
+            font-size: 30px;
+        }
+        .left-side h6{
+            font-size:17px;
+            margin-left:100px;
+        }
+        .left-side p {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #aaa;
+        }
+        .right-side, .new-right-side {
+            background-color:white;
+            width: 50%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .new-right-side {
+            display:none;
+            margin-top:-20px;
+        }
+        .right-side .head ,.new-right-side .head{
+            font-family:"Concert One", sans-serif;    
+            font-weight:500;
+            color:black;
+            margin-bottom: 20px;
+            font-size: 24px;
+            display: inline-block;
+            border-bottom:2px black solid;
+            padding-bottom:5px;
+        }
+        .new-right-side .head{padding-right:260px;
+        font-size:30px;}
+        .form-group {
+            margin-bottom: 20px;
+            position:relative;
+        }
+        .form-group i{position:absolute;
+            color:grey;
+            top:30%;
+            left:10px;}
+        
+        .form-group input {
+            width: 90%;
+            padding: 10px 10px 10px 30px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input[type="password"]::placeholder{color:grey;
+        }
+        .form-group input:focus {
+            border-color: #000;
+            padding-left:30px;
+        }
+        .form-group .icon {
+            position: absolute;
+            margin-left: -25px;
+            margin-top: 13px;
+            font-size: 16px;
+            color: #000;
+        }
+        .form-group input[type="email"] {
+            padding-right: 15px;
+        }
+        .btn {
+            width: 100%;
+            background-color: #000;
+            color: #fff;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #333;
+        }
+        .login-link {
+            margin-top: 10px;
+            text-align: center;
+        }
+        .login-link a {
+            color: #000;
+            text-decoration: none;
+        }
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        .b {
+            color: green;
+        }
+        .c {
+            color: red;
+        }
+        .d {
+            color:yellow;
+        }
+        .err {
+            height: 20px;
+            margin-bottom: 5px;
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        #web-logo {
+            height: 100px;
+            width:100px;
+            border:1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            margin:auto;
+        }
+        #web-logo:hover {
+            transform: rotate(360deg) scale(1.2);
+            transition: ease all 2.5s;
+        }
+        #img-holder {
+            padding-left:100px;
+        }
+        #login-button, #signup-button {
+            color: blue;
+            text-decoration: underline;
+            border: none;
+            cursor: pointer;
+            background-color: white;
+            margin-left: 0px;
+            font-size: 16px;
+            padding: 0px 0px 0px 0px;
+        }
+        #login-button:hover {
+            color: blueviolet;
+        }
+        #login, #signup {
+            margin-top: 3px;
+        }
+        .new-right-side {
+            transform: translateX(100%);
+        }
+        .active .left-side {
+            transform: translateX(100%);
+            display: none;
+        }
+        .active .new-left-side {
+            transform: translateX(0);
+            display:block;
+        }
+        .active .right-side {
+            display: none;
+            transform: translateX(100%);
+        }
+        .active .new-right-side {
+            transform: translateX(0);
+            display:block;
+        }
+
+        .fa-lock{margin-top:-7px;}
+
+        .new-right-side .fa-lock{margin-top:0px;}
+
+        .btn a{text-decoration: none;
+        color:white;}
+    </style>
+    <script>
+        function Strength(password) {
+            let i = 0;
+            if (password.length > 6) { i++; }
+            if (password.length >= 10) { i++; }
+            if (/[A-Z]/.test(password)) { i++; }
+            if (/[0-9]/.test(password)) { i++; }
+            if (/[A-Za-z0-8]/.test(password)) { i++; }
+            return i;
+        }
+
+        $(document).ready(function(){
+            // alert("Hello");
+            $("#txtuser").keyup(function(){
+            let user=$("#txtuser").val();
+            let eexp=/[A-Za-z0-9\w]/;
+            let res=eexp.test(user);
+            if(res==true)
+              {
+                $("#erruser").html("Valid username");
+                $("#erruser").addClass("b").removeClass("c");
+              } 
+            else
+                $("#erruser").html("Invalid username").addClass("c").removeClass("b");
+            });
+
+             $("#password").keyup(function(){
+                let pwd=$("#password").val();
+                let strength = Strength(pwd);
+                if(strength <= 2)
+                    $("#errpwd").html("Weak Password").addClass("c").removeClass("b");
+                else if(strength >= 2 && strength <= 4) 
+                    $("#errpwd").html("Moderate Password").addClass("d").removeClass("c");
+                else 
+                    $("#errpwd").html("Strong Password").addClass("b").removeClass("d");
+                });
+            $("#txtemail").keyup(function(){
+                let email=$("#txtemail").val();
+                let eexp=/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                let res=eexp.test(email);
+                if(res==true)
+                    $("#erremail").html("Valid Email").addClass("b").removeClass("c");
+                else
+                    $("#erremail").html("Invalid Email").addClass("c").removeClass("b");
+            });
+            $("#login-button").click(function() {
+                $("#container").toggleClass("active");
+            });
+            $("#s-b").click(function() {
+                $("#container").removeClass("active");
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container" id="container">
+        <div class="new-left-side">
+            <p><img id="web-logo" src="Pics/web_logo.jpg"></p> 
+            <h1>WELCOME BACK!</h1>
+        </div>
+        <div class="new-right-side">
+            <h2 class="head">Login</h2>
+            <form>
+                <div class="form-group">
+                    <i class="fa-solid fa-user"></i><input type="text" id="login-username" placeholder="Username" required>
+                </div>
+                <div class="form-group">
+                    <i class="fas fa-lock"></i><input type="password" id="login-password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn">Login</button>
+            </form>
+            <p style="font-size:18px; margin-bottom: 0px;"><center>OR</center><span style="margin-top:-5px; margin-bottom:15px;">Don't have an account yet?</p>
+            <center><button id="s-b" class="btn">Create an Account</button></center>
+        </div>
+        <div class="left-side">
+            <!-- <p id="img-holder"><img id="web-logo" src="/pics/web_logo.jpg"></p> -->
+            <h1>WELCOME GUYS!</h1>
+            <h6>Join Us Now!</h6>
+            <p></p>
+        </div>
+        <div class="right-side" >
+            <h2 class="head"><font size="6">Sign Up</h2></font>
+            <form method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <i class="fa-solid fa-user"></i><input type="text" id="txtuser" placeholder="Username" required>
+                    <span class="err" id="erruser"></span>
+                </div>
+                <div class="form-group">
+                    <i class="fas fa-envelope"></i><input type="email" id="txtemail" placeholder="Email" required>
+                    <span class="err" id="erremail"></span>
+                </div>
+                <div class="form-group">
+                    <i class="fas fa-lock"></i><input type="password" id="password" placeholder="Password" required>
+                    &nbsp;<span class="err" id="errpwd"></span>
+                </div>
+                <button type="submit" class="btn" formaction="/signup">Signup</button>
+            </form>
+            <p id="login">Already have an account? <button id="login-button">Login</button></p>
+        </div>
+    </div>
+</body>
+</html>

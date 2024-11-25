@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trackify</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        .sidemenu { width: 250px; position: fixed; height: 100%; background: #343a40; transition: 0.3s; }
+        .sidemenu a { color: white; }
+        .sidemenu.active { left: 0; }
+        .overlay { display: none; position: fixed; width: 100%; height: 100%; top: 0; left: 0; background: rgba(0, 0, 0, 0.5); }
+        .overlay.active { display: block; }
+        .pie_chart { width: 300px; height: 300px; border-radius: 50%; margin: auto; background: lightgray; }
+        .category-icons a { font-size: 24px; color: #555; }
+        .btn-balance { margin: 20px 0; }
+    </style>
+</head>
+<body>
+
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="row bg-primary text-white p-3">
+        <div class="col-6">
+            <h1>Trackify</h1>
+        </div>
+        <div class="col-6 text-end">
+            <a href="#" onclick="togglesidemenu()" class="text-white"><i class="fa-solid fa-bars fa-2x"></i></a>
+        </div>
+    </div>
+
+    <!-- Side Menu -->
+    <div class="sidemenu bg-dark" id="sidemenu">
+        <ul class="list-unstyled p-3">
+            <li><a href="#"><i class="fa-solid fa-user"></i> Profile</a></li>
+            <li><a href="#"><i class="fa-solid fa-layer-group"></i> Categories</a></li>
+            <li><a href="#"><i class="fa-solid fa-coins"></i> Transactions</a></li>
+        </ul>
+    </div>
+    <div id="overlay" class="overlay" onclick="togglesidemenu()"></div>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <!-- Pie Chart and Icons -->
+        <div class="row">
+            <div class="col-md-8 text-center">
+                <div class="pie_chart"></div>
+            </div>
+            <div class="col-md-4">
+                <div class="d-flex flex-wrap justify-content-around category-icons">
+                    <a href="#phone" onclick="addExpense('phone')" class="phone_bill"><i class="fas fa-phone"></i></a>
+                    <a href="#home" onclick="addExpense('home')" class="home_bill"><i class="fas fa-home"></i></a>
+                    <a href="#gift" onclick="addExpense('gift')" class="gift_bill"><i class="fa-solid fa-gift"></i></a>
+                    <a href="#train" onclick="addExpense('train')" class="train_bill"><i class="fa-solid fa-train"></i></a>
+                    <a href="#car" onclick="addExpense('car')" class="car_bill"><i class="fa-solid fa-car-side"></i></a>
+                    <a href="#brush" onclick="addExpense('brush')" class="brush_bill"><i class="fa-solid fa-toilet-paper"></i></a>
+                    <a href="#bath" onclick="addExpense('bath')" class="bath_bill"><i class="fa-solid fa-bath"></i></a>
+                    <a href="#dining" onclick="addExpense('dining')" class="dining_bill"><i class="fas fa-utensils"></i></a>
+                    <a href="#medical" onclick="addExpense('medical')" class="medical_bill"><i class="fas fa-thermometer-half"></i></a>
+                    <a href="#drinks" onclick="addExpense('drinks')" class="drinks_bill"><i class="fa-solid fa-martini-glass-citrus"></i></a>
+                    <a href="#cloths" onclick="addExpense('cloth')" class="cloth_bill"><i class="fa-solid fa-shirt"></i></a>
+                    <a href="#dog" onclick="addExpense('dog')" class="dog_bill"><i class="fa-solid fa-dog"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Balance Button -->
+        <div class="row text-center">
+            <button class="btn btn-primary btn-balance" id="btn">Balance $1000</button>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript and dependencies -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function togglesidemenu() {
+        document.getElementById('sidemenu').classList.toggle('active');
+        document.getElementById('overlay').classList.toggle('active');
+    }
+
+    // JavaScript for expense tracking and pie chart
+    document.addEventListener("DOMContentLoaded", () => {
+        const expenses = { phone: 0, home: 0, gift: 0, train: 0, car: 0, brush: 0, bath: 0, dining: 0, medical: 0, drinks: 0, cloth: 0, dog: 0 };
+        const colors = { phone: "rgb(104, 104, 195)", home: "rgb(48, 177, 108)", gift: "rgb(206, 79, 41)", train: "rgb(218, 107, 185)", car: "rgb(114, 195, 114)", brush: "rgb(147, 57, 120)", bath: "rgb(79, 145, 236)", dining: "rgb(145, 57, 245)", medical: "rgb(211, 121, 93)", drinks: "rgb(229, 165, 61)", cloth: "rgb(92, 50, 189)", dog: "rgb(179, 136, 68)" };
+        const chart = document.querySelector(".pie_chart");
+
+        Object.keys(expenses).forEach(category => {
+            document.querySelector(`.${category}_bill`).addEventListener("click", () => addExpense(category));
+        });
+
+        function addExpense(category) {
+            const amount = parseFloat(prompt(`Enter amount for ${category}:`)) || 0;
+            expenses[category] += amount;
+            updateChart();
+        }
+
+        function updateChart() {
+            const total = Object.values(expenses).reduce((acc, val) => acc + val, 0);
+            let gradient = "conic-gradient(";
+            let startAngle = 0;
+
+            Object.keys(expenses).forEach(category => {
+                const proportion = (expenses[category] / total) * 360;
+                const endAngle = startAngle + proportion;
+                gradient += `${colors[category]} ${startAngle}deg ${endAngle}deg, `;
+                startAngle = endAngle;
+            });
+
+            gradient = gradient.slice(0, -2) + ")";
+            chart.style.background = gradient;
+        }
+    });
+</script>
+</body>
+</html>
