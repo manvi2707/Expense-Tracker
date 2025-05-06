@@ -16,12 +16,12 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #f2f2f2;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background:linear-gradient(to right,rgb(71, 0, 61),rgb(116, 26, 107),rgb(202, 119, 211),#e7d6ea);
+            background: linear-gradient(to right, rgb(43, 43, 93), rgb(84, 61, 143), rgb(178, 88, 188), #f0d1f5);
             background-size: cover;
         }
         
@@ -34,25 +34,25 @@
             border-radius: 10px;
         }
         .left-side, .new-left-side {
-            background-color:rgb(167, 64, 167);
+            background-color: rgb(115, 57, 140);
             color: #fff;
             width: 50%;
             padding: 40px;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            line-height:0.4;
+            line-height: 0.4;
         }
         .new-left-side {
-            display:none;
+            display: none;
         }
-        .left-side h1,.new-left-side h1 {
-            margin:70px 0px 0px 0px;
+        .left-side h1, .new-left-side h1 {
+            margin: 70px 0px 0px 0px;
             font-size: 30px;
         }
         .left-side h6{
-            font-size:17px;
-            margin-left:100px;
+            font-size: 17px;
+            margin-left: 100px;
         }
         .left-side p {
             margin-top: 20px;
@@ -60,7 +60,7 @@
             color: #aaa;
         }
         .right-side, .new-right-side {
-            background-color:white;
+            background-color: white;
             width: 50%;
             padding: 40px;
             display: flex;
@@ -68,29 +68,30 @@
             justify-content: center;
         }
         .new-right-side {
-            display:none;
-            margin-top:-20px;
+            display: none;
+            margin-top: -20px;
         }
-        .right-side .head ,.new-right-side .head{
-            font-family:"Concert One", sans-serif;    
-            font-weight:500;
-            color:black;
+        .right-side .head, .new-right-side .head {
+            font-family: "Concert One", sans-serif;
+            font-weight: 500;
+            color: black;
             margin-bottom: 20px;
             font-size: 24px;
             display: inline-block;
-            border-bottom:2px black solid;
-            padding-bottom:5px;
+            border-bottom: 2px black solid;
+            padding-bottom: 5px;
         }
-        .new-right-side .head{padding-right:260px;
-        font-size:30px;}
+        .new-right-side .head { padding-right: 260px; font-size: 30px; }
         .form-group {
             margin-bottom: 20px;
-            position:relative;
+            position: relative;
         }
-        .form-group i{position:absolute;
-            color:grey;
-            top:30%;
-            left:10px;}
+        .form-group i {
+            position: absolute;
+            color: grey;
+            top: 30%;
+            left: 10px;
+        }
         
         .form-group input {
             width: 90%;
@@ -100,11 +101,10 @@
             font-size: 16px;
         }
 
-        input[type="password"]::placeholder{color:grey;
-        }
+        input[type="password"]::placeholder { color: grey; }
         .form-group input:focus {
-            border-color: #000;
-            padding-left:30px;
+            border-color: #5e2b8b;
+            padding-left: 30px;
         }
         .form-group .icon {
             position: absolute;
@@ -118,7 +118,7 @@
         }
         .btn {
             width: 100%;
-            background-color: #000;
+            background-color: #5e2b8b;
             color: #fff;
             padding: 15px;
             border: none;
@@ -127,7 +127,7 @@
             cursor: pointer;
         }
         .btn:hover {
-            background-color: #333;
+            background-color: #451e71;
         }
         .login-link {
             margin-top: 10px;
@@ -147,7 +147,7 @@
             color: red;
         }
         .d {
-            color:yellow;
+            color: yellow;
         }
         .err {
             height: 20px;
@@ -157,17 +157,17 @@
         }
         #web-logo {
             height: 100px;
-            width:100px;
-            border:1px solid rgba(0, 0, 0, 0.1);
+            width: 100px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
             border-radius: 15px;
-            margin:auto;
+            margin: auto;
         }
         #web-logo:hover {
             transform: rotate(360deg) scale(1.2);
             transition: ease all 2.5s;
         }
         #img-holder {
-            padding-left:100px;
+            padding-left: 100px;
         }
         #login-button, #signup-button {
             color: blue;
@@ -194,7 +194,7 @@
         }
         .active .new-left-side {
             transform: translateX(0);
-            display:block;
+            display: block;
         }
         .active .right-side {
             display: none;
@@ -202,15 +202,17 @@
         }
         .active .new-right-side {
             transform: translateX(0);
-            display:block;
+            display: block;
         }
 
-        .fa-lock{margin-top:-7px;}
+        .fa-lock { margin-top: -7px; }
 
-        .new-right-side .fa-lock{margin-top:0px;}
+        .new-right-side .fa-lock { margin-top: 0px; }
 
-        .btn a{text-decoration: none;
-        color:white;}
+        .btn a {
+            text-decoration: none;
+            color: white;
+        }
     </style>
     <script>
         function Strength(password) {
@@ -224,22 +226,20 @@
         }
 
         $(document).ready(function(){
-            // alert("Hello");
             $("#txtuser").keyup(function(){
-            let user=$("#txtuser").val();
-            let eexp=/[A-Za-z0-9\w]/;
-            let res=eexp.test(user);
-            if(res==true)
-              {
+            let user = $("#txtuser").val();
+            let eexp = /[A-Za-z0-9\w]/;
+            let res = eexp.test(user);
+            if(res == true) {
                 $("#erruser").html("Valid username");
                 $("#erruser").addClass("b").removeClass("c");
-              } 
-            else
+            } else {
                 $("#erruser").html("Invalid username").addClass("c").removeClass("b");
+            }
             });
 
-             $("#password").keyup(function(){
-                let pwd=$("#password").val();
+            $("#password").keyup(function(){
+                let pwd = $("#password").val();
                 let strength = Strength(pwd);
                 if(strength <= 2)
                     $("#errpwd").html("Weak Password").addClass("c").removeClass("b");
@@ -248,18 +248,21 @@
                 else 
                     $("#errpwd").html("Strong Password").addClass("b").removeClass("d");
                 });
+
             $("#txtemail").keyup(function(){
-                let email=$("#txtemail").val();
-                let eexp=/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-                let res=eexp.test(email);
-                if(res==true)
+                let email = $("#txtemail").val();
+                let eexp = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                let res = eexp.test(email);
+                if(res == true)
                     $("#erremail").html("Valid Email").addClass("b").removeClass("c");
                 else
                     $("#erremail").html("Invalid Email").addClass("c").removeClass("b");
             });
+
             $("#login-button").click(function() {
                 $("#container").toggleClass("active");
             });
+
             $("#s-b").click(function() {
                 $("#container").removeClass("active");
             });
@@ -287,13 +290,11 @@
             <center><button id="s-b" class="btn">Create an Account</button></center>
         </div>
         <div class="left-side">
-            <!--- <p id="img-holder"><img id="web-logo" src="/pics/web_logo.jpg"></p> --->
             <h1>WELCOME GUYS!</h1>
             <h6>Join Us Now!</h6>
-            <p></p>
         </div>
-        <div class="right-side" >
-            <h2 class="head"><font size="6">Sign Up</h2></font>
+        <div class="right-side">
+            <h2 class="head"><font size="6">Sign Up</font></h2>
             <form method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <i class="fa-solid fa-user"></i><input type="text" id="txtuser" placeholder="Username" required>
@@ -314,3 +315,4 @@
     </div>
 </body>
 </html>
+
